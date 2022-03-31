@@ -21,7 +21,7 @@ public class MerchantPoOptions implements Serializable {
     @ApiModelProperty(value = "商户类型")
     List<String> area;
 
-    @ApiModelProperty(value = "标签")
+    @ApiModelProperty(value = "已被使用的标签")
     List<FilterOption> usedTags;
 
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gin.reservationinformationsystem.module.merchant.bo.tag.MerchantTagBo;
 import com.gin.reservationinformationsystem.module.merchant.dao.RelationMerchantTagPoDao;
+import com.gin.reservationinformationsystem.module.merchant.entity.MerchantTagPo;
 import com.gin.reservationinformationsystem.module.merchant.entity.RelationMerchantTagPo;
 import com.gin.reservationinformationsystem.module.merchant.service.MerchantTagPoService;
 import com.gin.reservationinformationsystem.module.merchant.service.RelationMerchantTagPoService;
@@ -64,10 +65,10 @@ public class RelationMerchantTagPoServiceImpl extends ServiceImpl<RelationMercha
     }
 
     @Override
-    public List<MerchantTagBo> listUsedTags() {
+    public List<MerchantTagPo> listUsedTags() {
         final QueryWrapper<RelationMerchantTagPo> qw = new QueryWrapper<>();
         qw.select("tag_uuid").groupBy("tagUuid");
         final List<String> tagUuid = list(qw).stream().map(RelationMerchantTagPo::getTagUuid).collect(Collectors.toList());
-        return merchantTagPoService.listByIds(tagUuid).stream().map(i -> new MerchantTagBo(i.getUuid(), i.getName())).collect(Collectors.toList());
+        return merchantTagPoService.listByIds(tagUuid);
     }
 }

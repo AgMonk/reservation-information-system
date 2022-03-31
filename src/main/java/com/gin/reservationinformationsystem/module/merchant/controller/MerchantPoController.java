@@ -116,7 +116,7 @@ public class MerchantPoController {
         final List<MerchantTypePo> types = merchantTypePoService.list();
         options.setTypes(FilterOption.build(types, type -> new FilterOption(type.getName(), type.getUuid())));
 
-        options.setUsedTags(FilterOption.build(relationMerchantTagPoService.listUsedTags(),i->new FilterOption(i.getName(),i.getUuid())));
+        options.setUsedTags(FilterOption.build(relationMerchantTagPoService.listUsedTags(), i -> new FilterOption(i.getName(), i.getUuid())));
 
         return Res.success("查询" + NAMESPACE + "过滤选项成功", options);
     }

@@ -1,9 +1,9 @@
 package com.gin.reservationinformationsystem.module.merchant.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.gin.reservationinformationsystem.module.merchant.bo.tag.MerchantTagBo;
 import com.gin.reservationinformationsystem.module.merchant.entity.MerchantPo;
+import com.gin.reservationinformationsystem.module.merchant.entity.MerchantTagPo;
 import com.gin.reservationinformationsystem.module.merchant.entity.RelationMerchantTagPo;
 import com.gin.reservationinformationsystem.sys.service.PageService;
 import com.gin.reservationinformationsystem.sys.service.ValidateService;
@@ -29,5 +29,6 @@ public interface RelationMerchantTagPoService extends IService<RelationMerchantT
           list.forEach(item->item.setTags(map.get(item.getUuid())));
      }
 
-      List<MerchantTagBo> listUsedTags();
+      List<MerchantTagPo> listUsedTags();
+
 }
