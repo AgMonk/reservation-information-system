@@ -9,19 +9,16 @@ import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
-
-import static com.gin.reservationinformationsystem.module.merchant.bo.merchant.Merchant4Create.API_URL;
+import java.time.ZonedDateTime;
 
 /**
- * 修改商户
+ * 创建商户
  * @author bx002
  */
 @Data
-@ApiModel("修改商户")
-public class Merchant4Update implements Serializable {
-    @ApiModelProperty(value = "UUID", required = true)
-    @NotEmpty("UUID")
-    String uuid;
+@ApiModel("创建商户")
+public class MerchantPo4Create implements Serializable {
+    public static final String API_URL = "https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.getLocation.html";
 
     @ApiModelProperty(value = "名称", required = true)
     @NotEmpty("名称")
@@ -56,6 +53,8 @@ public class Merchant4Update implements Serializable {
     public MerchantPo toMerchantPo() {
         final MerchantPo po = new MerchantPo();
         BeanUtils.copyProperties(this, po);
+        po.setTimestampCreated(ZonedDateTime.now().toEpochSecond());
+        po.setStatus(MerchantPo.STATUS_NORMAL);
         return po;
     }
 }

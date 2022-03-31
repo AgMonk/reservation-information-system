@@ -25,7 +25,6 @@ public class MerchantPo implements Serializable {
     public static final String STATUS_NORMAL = "正常";
     public static final String STATUS_PAUSE = "停用";
 
-
     @TableId
     @IsKey
     @Column(length = 36, isNull = false)

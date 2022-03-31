@@ -82,6 +82,11 @@ public class MerchantTypePoController {
 
         FileUtils.saveMultipartFile(file, new File("d:/home"+ path));
 
+        final MerchantTypePo entity = new MerchantTypePo();
+        entity.setUuid(uuid);
+        entity.setAvatar(path.toString());
+        service.updateById(entity);
+
         return Res.success("上传成功",path.toString());
     }
 
