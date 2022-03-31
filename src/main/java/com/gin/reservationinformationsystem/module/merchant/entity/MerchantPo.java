@@ -1,7 +1,9 @@
 package com.gin.reservationinformationsystem.module.merchant.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.gin.reservationinformationsystem.module.merchant.bo.tag.MerchantTagBo;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
 import com.gitee.sunchenbin.mybatis.actable.annotation.TableComment;
@@ -10,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -62,6 +65,9 @@ public class MerchantPo implements Serializable {
 
     @Column(comment = "介绍", length = 1000, isNull = false)
     String description;
+
+    @TableField(exist = false)
+    List<MerchantTagBo> tags;
 
     public void createUuid() {
         this.uuid = UUID.randomUUID().toString();
