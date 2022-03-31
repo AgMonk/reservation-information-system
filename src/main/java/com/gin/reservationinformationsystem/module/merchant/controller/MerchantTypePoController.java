@@ -8,7 +8,6 @@ import com.gin.reservationinformationsystem.module.merchant.entity.MerchantTypeP
 import com.gin.reservationinformationsystem.module.merchant.service.MerchantTypePoService;
 import com.gin.reservationinformationsystem.sys.request.PageParams;
 import com.gin.reservationinformationsystem.sys.response.Res;
-import com.gin.reservationinformationsystem.sys.utils.FileUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -72,22 +70,13 @@ public class MerchantTypePoController {
     @ApiOperation(value = "上传" + NAMESPACE + "头像")
     public Res<String> uploadAvatar(@PathVariable String uuid, MultipartFile file) throws IOException {
         service.assertUuidExits(uuid);
-        final String originalFilename = file.getOriginalFilename();
-        assert originalFilename != null;
-        final String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-
-        StringBuilder path = new StringBuilder();
-        path.append("/").append("MerchantType").append("/");
-        path.append(uuid).append(suffix);
-
-        FileUtils.saveMultipartFile(file, new File("d:/home"+ path));
-
+        final String path = service.saveAvatar(uuid, file);
         final MerchantTypePo entity = new MerchantTypePo();
         entity.setUuid(uuid);
-        entity.setAvatar(path.toString());
+        entity.setAvatar(path);
         service.updateById(entity);
 
-        return Res.success("上传成功",path.toString());
+        return Res.success("上传成功", path);
     }
 
     @PostMapping("page")

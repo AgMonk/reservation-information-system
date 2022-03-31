@@ -21,7 +21,9 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -108,5 +110,20 @@ public class MerchantPoController {
         options.setTypes(FilterOption.build(types, type -> new FilterOption(type.getName(), type.getUuid())));
 
         return Res.success("查询" + NAMESPACE + "过滤选项成功", options);
+    }
+
+    @PostMapping("uploadAvatar/{uuid}")
+    @RequiresPermissions(NAMESPACE + ":修改:*")
+    @ApiOperation(value = "上传" + NAMESPACE + "头像")
+    public Res<String> uploadAvatar(@PathVariable String uuid, MultipartFile file) throws IOException {
+        service.assertUuidExits(uuid);
+        final String path = service.saveAvatar(uuid, file);
+
+        final MerchantPo entity = new MerchantPo();
+        entity.setUuid(uuid);
+        entity.setAvatar(path);
+        service.updateById(entity);
+
+        return Res.success("上传成功", path);
     }
 }
