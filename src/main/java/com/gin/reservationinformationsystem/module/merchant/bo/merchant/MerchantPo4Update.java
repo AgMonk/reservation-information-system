@@ -1,6 +1,7 @@
 package com.gin.reservationinformationsystem.module.merchant.bo.merchant;
 
 import com.gin.reservationinformationsystem.module.merchant.entity.MerchantPo;
+import com.gin.reservationinformationsystem.sys.params_validation.annotation.EffectiveValues;
 import com.gin.reservationinformationsystem.sys.params_validation.annotation.NotEmpty;
 import com.gin.reservationinformationsystem.sys.params_validation.annotation.Phone;
 import io.swagger.annotations.ApiModel;
@@ -52,6 +53,10 @@ public class MerchantPo4Update implements Serializable {
     @ApiModelProperty(value = "介绍", required = true)
     @NotEmpty("介绍")
     String description;
+
+    @ApiModelProperty(value = "状态", allowableValues = MerchantPo.STATUS_NORMAL + " , " + MerchantPo.STATUS_PAUSE)
+    @EffectiveValues(values = {MerchantPo.STATUS_NORMAL, MerchantPo.STATUS_PAUSE})
+    String status;
 
     public MerchantPo toMerchantPo() {
         final MerchantPo po = new MerchantPo();

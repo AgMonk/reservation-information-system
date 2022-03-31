@@ -102,10 +102,9 @@ public class MerchantPoController {
         return Res.success("查询" + NAMESPACE + "分页数据成功", pageData);
     }
 
-
     @PostMapping("options")
     @RequiresPermissions(NAMESPACE + ":查询:分页")
-    @ApiOperation(value = "查询选项" + NAMESPACE)
+    @ApiOperation(value = "查询" + NAMESPACE + "选项")
     public Res<MerchantPoOptions> options() {
         final MerchantPoOptions options = new MerchantPoOptions();
 
@@ -120,6 +119,7 @@ public class MerchantPoController {
 
         return Res.success("查询" + NAMESPACE + "过滤选项成功", options);
     }
+
 
     @PostMapping("uploadAvatar/{uuid}")
     @RequiresPermissions(NAMESPACE + ":修改:*")

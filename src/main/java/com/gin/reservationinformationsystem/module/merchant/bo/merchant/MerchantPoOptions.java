@@ -15,10 +15,10 @@ import java.util.List;
 @Data
 @ApiModel("商户过滤选项")
 public class MerchantPoOptions implements Serializable {
-    @ApiModelProperty(value = "商户类型")
+    @ApiModelProperty(value = "所有商户类型")
     List<FilterOption> types;
 
-    @ApiModelProperty(value = "地区")
+    @ApiModelProperty(value = "已被使用的地区")
     List<String> area;
 
     @ApiModelProperty(value = "已被使用的标签")
