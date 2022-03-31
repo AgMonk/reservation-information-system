@@ -85,7 +85,7 @@ public class MerchantPoController {
     }
 
     @PostMapping("page")
-    @RequiresPermissions(NAMESPACE + ":查询:分页")
+//    @RequiresPermissions(NAMESPACE + ":查询:分页")
     @ApiOperation(value = "查询分页" + NAMESPACE)
     public Res<Page<MerchantPo>> page(@RequestBody @Validated PageParams<Filter4MerchantPo> param) {
 
@@ -103,7 +103,7 @@ public class MerchantPoController {
     }
 
     @PostMapping("options")
-    @RequiresPermissions(NAMESPACE + ":查询:分页")
+//    @RequiresPermissions(NAMESPACE + ":查询:分页")
     @ApiOperation(value = "查询" + NAMESPACE + "选项")
     public Res<MerchantPoOptions> options() {
         final MerchantPoOptions options = new MerchantPoOptions();
