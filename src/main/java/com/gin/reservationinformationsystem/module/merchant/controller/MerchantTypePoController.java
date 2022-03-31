@@ -37,10 +37,10 @@ public class MerchantTypePoController {
 
     private final MerchantTypePoService service;
 
-    @PostMapping("add/{name}")
+    @PostMapping("add")
     @RequiresPermissions(NAMESPACE + ":添加:*")
     @ApiOperation(value = "添加" + NAMESPACE)
-    public Res<Void> add(@PathVariable String name) {
+    public Res<Void> add(@RequestParam String name) {
         final MerchantTypePo entity = new MerchantTypePo(name);
         entity.createUuid();
         service.save(entity);

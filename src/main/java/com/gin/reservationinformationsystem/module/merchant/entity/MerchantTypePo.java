@@ -30,7 +30,7 @@ public class MerchantTypePo implements Serializable {
     @Column(comment = "名称", length = 60, isNull = false)
     String name;
 
-    @Column(comment = "头像地址", length = 200, isNull = false)
+    @Column(comment = "头像地址", length = 200)
     String avatar;
 
     public void createUuid() {

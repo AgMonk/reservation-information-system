@@ -53,6 +53,7 @@ public class MerchantPo4Create implements Serializable {
     public MerchantPo toMerchantPo() {
         final MerchantPo po = new MerchantPo();
         BeanUtils.copyProperties(this, po);
+        po.createUuid();
         po.setTimestampCreated(ZonedDateTime.now().toEpochSecond());
         po.setStatus(MerchantPo.STATUS_NORMAL);
         return po;

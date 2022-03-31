@@ -51,10 +51,10 @@ public class MerchantPo implements Serializable {
     @Column(comment = "地区", length = 100, isNull = false)
     String area;
 
-    @Column(comment = "纬度", isNull = false, decimalLength = 4)
+    @Column(comment = "纬度",  decimalLength = 4)
     Double latitude;
 
-    @Column(comment = "经度", isNull = false, decimalLength = 4)
+    @Column(comment = "经度",  decimalLength = 4)
     Double longitude;
 
     @Column(comment = "状态", length = 20, isNull = false)

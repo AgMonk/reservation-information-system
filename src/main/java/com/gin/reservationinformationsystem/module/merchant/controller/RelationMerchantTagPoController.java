@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Validated
 @RequiredArgsConstructor
-@RequestMapping("RelationMerchantTagPo")
+@RequestMapping("merchant/tag")
 @Api(tags = RelationMerchantTagPoController.NAMESPACE + "相关接口")
 @Transactional(rollbackFor = Exception.class)
 public class RelationMerchantTagPoController {
@@ -32,10 +32,10 @@ public class RelationMerchantTagPoController {
     private final MerchantPoService merchantPoService;
     private final MerchantTagPoService merchantTagPoService;
 
-    @PostMapping("add")
+    @PostMapping("addTagToMerchant")
     @RequiresPermissions(NAMESPACE + ":添加:*")
     @ApiOperation(value = "添加" + NAMESPACE)
-    public Res<Void> add(@RequestBody @Validated RelationMerchantTagPo4Create entity) {
+    public Res<Void> addTagToMerchant(@RequestBody @Validated RelationMerchantTagPo4Create entity) {
 
         merchantPoService.assertUuidExits(entity.getMerchantUuid());
         merchantTagPoService.assertUuidExits(entity.getTagUuid());
@@ -44,7 +44,7 @@ public class RelationMerchantTagPoController {
         return Res.success("添加成功");
     }
 
-    @PostMapping("del/{uuid}")
+    @PostMapping("delTagFromMerchant/{uuid}")
     @RequiresPermissions(NAMESPACE + ":删除:*")
     @ApiOperation(value = "删除" + NAMESPACE)
     public Res<Void> del(@PathVariable String uuid) {

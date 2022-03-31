@@ -34,10 +34,10 @@ public class MerchantTagPoController {
 
     private final MerchantTagPoService service;
 
-    @PostMapping("add/{name}")
+    @PostMapping("add")
     @RequiresPermissions(NAMESPACE + ":添加:*")
     @ApiOperation(value = "添加" + NAMESPACE)
-    public Res<Void> add(@PathVariable String name) {
+    public Res<Void> add(@RequestParam String name) {
         final MerchantTagPo entity = new MerchantTagPo();
         entity.setName(name);
         entity.createUuid();

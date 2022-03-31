@@ -8,6 +8,7 @@ import com.gin.reservationinformationsystem.module.merchant.entity.MerchantTagPo
 import com.gin.reservationinformationsystem.module.merchant.entity.RelationMerchantTagPo;
 import com.gin.reservationinformationsystem.module.merchant.service.MerchantTagPoService;
 import com.gin.reservationinformationsystem.module.merchant.service.RelationMerchantTagPoService;
+import com.gin.reservationinformationsystem.sys.utils.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -48,13 +49,19 @@ public class RelationMerchantTagPoServiceImpl extends ServiceImpl<RelationMercha
 
     @Override
     public Map<String, List<MerchantTagBo>> mapByMerchantUuid(List<String> merchantUuid) {
+        final HashMap<String, List<MerchantTagBo>> map = new HashMap<>();
+        if(StringUtils.isEmpty(merchantUuid)){
+            return map;
+        }
         final QueryWrapper<RelationMerchantTagPo> qw = new QueryWrapper<>();
         qw.in("merchant_uuid",merchantUuid);
         final List<RelationMerchantTagPo> list = list(qw);
+        if (list.size()==0){
+            return map;
+        }
         final List<String> tagUuid = list.stream().map(RelationMerchantTagPo::getTagUuid).distinct().collect(Collectors.toList());
         final Map<String, String> tagMap = merchantTagPoService.mapById(tagUuid);
 
-        final HashMap<String, List<MerchantTagBo>> map = new HashMap<>();
         list.forEach(item->{
             final String uuid = item.getMerchantUuid();
             final List<MerchantTagBo> data = map.getOrDefault(uuid, new ArrayList<>());
@@ -67,8 +74,11 @@ public class RelationMerchantTagPoServiceImpl extends ServiceImpl<RelationMercha
     @Override
     public List<MerchantTagPo> listUsedTags() {
         final QueryWrapper<RelationMerchantTagPo> qw = new QueryWrapper<>();
-        qw.select("tag_uuid").groupBy("tagUuid");
+        qw.select("tag_uuid").groupBy("tag_uuid");
         final List<String> tagUuid = list(qw).stream().map(RelationMerchantTagPo::getTagUuid).collect(Collectors.toList());
+        if (tagUuid.size()==0) {
+            return new ArrayList<>();
+        }
         return merchantTagPoService.listByIds(tagUuid);
     }
 }
