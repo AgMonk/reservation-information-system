@@ -70,15 +70,19 @@ public class MerchantTypePoController {
     @PostMapping("uploadAvatar/{uuid}")
     @RequiresPermissions(NAMESPACE + ":修改:*")
     @ApiOperation(value = "上传" + NAMESPACE + "头像")
-    public Res<Void> uploadAvatar(@PathVariable String uuid, MultipartFile file) throws IOException {
+    public Res<String> uploadAvatar(@PathVariable String uuid, MultipartFile file) throws IOException {
         service.assertUuidExits(uuid);
         final String originalFilename = file.getOriginalFilename();
         assert originalFilename != null;
         final String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
 
-        FileUtils.saveMultipartFile(file, new File("d:/home/MerchantType/" + uuid + suffix));
+        StringBuilder path = new StringBuilder();
+        path.append("/").append("MerchantType").append("/");
+        path.append(uuid).append(suffix);
 
-        return Res.success("上传成功");
+        FileUtils.saveMultipartFile(file, new File("d:/home"+ path));
+
+        return Res.success("上传成功",path.toString());
     }
 
     @PostMapping("page")

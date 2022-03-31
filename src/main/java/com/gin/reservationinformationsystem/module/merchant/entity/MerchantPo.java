@@ -22,6 +22,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MerchantPo implements Serializable {
+    public static final String STATUS_NORMAL = "正常";
+    public static final String STATUS_PAUSE = "停用";
+
+
     @TableId
     @IsKey
     @Column(length = 36, isNull = false)
@@ -30,7 +34,7 @@ public class MerchantPo implements Serializable {
     @Column(comment = "名称", length = 60, isNull = false)
     String name;
 
-    @Column(comment = "商户类型", length = 36, isNull = false)
+    @Column(comment = "商户类型uuid", length = 36, isNull = false)
     String typeUuid;
 
     @Column(comment = "电话", length = 30, isNull = false)
@@ -45,7 +49,6 @@ public class MerchantPo implements Serializable {
     @Column(comment = "地区", length = 100, isNull = false)
     String area;
 
-    //            https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.getLocation.html
     @Column(comment = "纬度", isNull = false, decimalLength = 4)
     Double latitude;
 
@@ -55,7 +58,7 @@ public class MerchantPo implements Serializable {
     @Column(comment = "状态", length = 20, isNull = false)
     String status;
 
-    @Column(comment = "头像地址", length = 200, isNull = false)
+    @Column(comment = "头像地址", length = 200)
     String avatar;
 
     @Column(comment = "介绍", length = 1000, isNull = false)

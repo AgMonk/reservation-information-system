@@ -1,8 +1,9 @@
-package com.gin.reservationinformationsystem.module.merchant.service;
+package com.gin.reservationinformationsystem.module.merchant.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gin.reservationinformationsystem.module.merchant.dao.MerchantTagPoDao;
 import com.gin.reservationinformationsystem.module.merchant.entity.MerchantTagPo;
+import com.gin.reservationinformationsystem.module.merchant.service.MerchantTagPoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
