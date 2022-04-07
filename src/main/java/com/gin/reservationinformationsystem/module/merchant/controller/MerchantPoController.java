@@ -104,7 +104,7 @@ public class MerchantPoController {
 
     @PostMapping("options")
 //    @RequiresPermissions(NAMESPACE + ":查询:分页")
-    @ApiOperation(value = "查询" + NAMESPACE + "选项")
+    @ApiOperation(value = "查询" + NAMESPACE + "筛选选项")
     public Res<MerchantPoOptions> options() {
         final MerchantPoOptions options = new MerchantPoOptions();
 

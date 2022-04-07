@@ -8,3 +8,10 @@ spring:
     url: jdbc:mysql://172.17.0.1:3306/${databse.name}?serverTimezone=GMT%2B8&characterEncoding=utf-8&allowMultiQueries=true
     username: root
     password: lzbx2837200
+server:
+  port: 443
+  ssl:
+    enabled: true
+    key-store: classpath:yy.znwxzx.cn.jks
+    key-store-password: c4n9i9bn2x8uz6r
+    key-store-type: JKS

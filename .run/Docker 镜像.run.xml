@@ -1,0 +1,28 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Docker 镜像" type="docker-deploy" factoryName="docker-image" server-name="孵化器联盟">
+    <deployment type="docker-image">
+      <settings>
+        <option name="imageTag" value="ris:latest" />
+        <option name="containerName" value="ris" />
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="443" />
+              <option name="hostPort" value="443" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+        <option name="commandLineOptions" value="--restart always" />
+        <option name="volumeBindings">
+          <list>
+            <DockerVolumeBindingImpl>
+              <option name="containerPath" value="/home/avatar" />
+              <option name="hostPath" value="/home/avatar" />
+            </DockerVolumeBindingImpl>
+          </list>
+        </option>
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

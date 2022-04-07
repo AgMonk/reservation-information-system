@@ -170,6 +170,51 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!--跳过测试-->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!--docker-maven插件-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <!--表示在 package完成后执行 docker  build 命令-->
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--Docker 的主机地址-->
+                    <!-- http访问时 端口为2375  https访问时 端口为2376-->
+                    <dockerHost>https://42.193.183.156:2376</dockerHost>
+                    <!--docker build 生成的镜像的名称 注意不要有大写-->
+                    <imageName>ris</imageName>
+                    <!-- 使用https 证书访问时需要提供证书文件的存放路径-->
+                    <dockerCertPath>D:\Project\ca\42.193.183.156</dockerCertPath>
+                    <!--镜像的 tags-->
+                    <forceTags>true</forceTags>
+                    <!--Dockerfile 的位置 表示在项目根目录-->
+                    <dockerDirectory>${project.basedir}</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.war</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
