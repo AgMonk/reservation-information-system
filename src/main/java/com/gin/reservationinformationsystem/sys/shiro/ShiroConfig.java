@@ -86,6 +86,7 @@ public class ShiroConfig {
         map.put("/merchant/feedback/add", "anon");
         map.put("/merchant/merchant/page", "anon");
         map.put("/merchant/merchant/get/**", "anon");
+        map.put("/merchant/type/getAll", "anon");
         map.put("/merchant/merchant/options", "anon");
 
 

@@ -65,6 +65,12 @@ public class MerchantTypePoController {
         return Res.success("删除成功");
     }
 
+    @PostMapping("getAll")
+    @ApiOperation(value = "查询全部商户")
+    public Res<List<MerchantTypePo>> getAll() {
+        return Res.success("查询全部商户成功",service.list());
+    }
+
     @PostMapping("uploadAvatar/{uuid}")
     @RequiresPermissions(NAMESPACE + ":修改:*")
     @ApiOperation(value = "上传" + NAMESPACE + "头像")
