@@ -6,6 +6,7 @@ import com.gin.reservationinformationsystem.module.merchant.bo.FeedBackMessagePo
 import com.gin.reservationinformationsystem.module.merchant.bo.Filter4FeedBackMessagePo;
 import com.gin.reservationinformationsystem.module.merchant.entity.FeedBackMessagePo;
 import com.gin.reservationinformationsystem.module.merchant.service.FeedBackMessagePoService;
+import com.gin.reservationinformationsystem.module.merchant.service.MerchantPoService;
 import com.gin.reservationinformationsystem.sys.request.PageParams;
 import com.gin.reservationinformationsystem.sys.response.Res;
 import io.swagger.annotations.Api;
@@ -32,17 +33,19 @@ import static com.gin.reservationinformationsystem.module.merchant.entity.FeedBa
 @Slf4j
 @Validated
 @RequiredArgsConstructor
-@RequestMapping("feedback")
+@RequestMapping("merchant/feedback")
 @Api(tags = FeedBackMessagePoController.NAMESPACE + "相关接口")
 @Transactional(rollbackFor = Exception.class)
 public class FeedBackMessagePoController {
     public static final String NAMESPACE = "反馈信息";
 
     private final FeedBackMessagePoService service;
+    private final MerchantPoService merchantPoService;
 
     @PostMapping("add")
     @ApiOperation(value = "添加" + NAMESPACE)
     public Res<Void> add(@RequestBody @Validated FeedBackMessagePo4Create entity) {
+        merchantPoService.assertUuidExits(entity.getMerchantUuid());
         service.save(entity.toFeedBackMessagePo());
         return Res.success("反馈成功");
     }
