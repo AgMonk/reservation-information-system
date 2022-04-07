@@ -41,6 +41,7 @@ public class FeedBackMessagePo implements Serializable {
     String content;
 
     @Column(comment = "创建时间", isNull = false)
+    @Index
     Long timestampCreated;
 
     @Column(comment = "状态", length = 20, isNull = false,defaultValue = STATUS_NOT_PROCESSED)

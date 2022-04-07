@@ -83,6 +83,7 @@ public class ShiroConfig {
         map.put("/wx/**", "anon");
         map.put("/article/mainPage", "anon");
         map.put("/test/**", "anon");
+        map.put("/feedback/add", "anon");
         map.put("/merchant/merchant/page", "anon");
         map.put("/merchant/merchant/options", "anon");
 
