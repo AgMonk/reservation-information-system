@@ -26,6 +26,9 @@ public class Filter4MerchantPo implements Serializable, IFilter {
     @ApiModelProperty(value = "筛选指定地区的商户")
     List<String> area;
 
+    @ApiModelProperty(value = "名称关键字")
+    String name;
+
     @Override
     public void handleQueryWrapper(QueryWrapper<?> queryWrapper) {
         if (!StringUtils.isEmpty(usedTagsUuid)) {
@@ -35,5 +38,6 @@ public class Filter4MerchantPo implements Serializable, IFilter {
         }
         QueryWrapperUtils.inIfNotEmpty(queryWrapper,"type_uuid",types);
         QueryWrapperUtils.inIfNotEmpty(queryWrapper,"area",area);
+        QueryWrapperUtils.likeIfNotEmpty(queryWrapper,"name",name);
     }
 }

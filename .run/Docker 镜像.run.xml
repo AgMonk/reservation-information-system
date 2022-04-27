@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Docker 镜像" type="docker-deploy" factoryName="docker-image" server-name="孵化器联盟">
+  <configuration default="false" name="Docker 镜像" type="docker-deploy" factoryName="docker-image" server-name="孵化器联盟/商户">
     <deployment type="docker-image">
       <settings>
         <option name="imageTag" value="ris:latest" />

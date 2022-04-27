@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 商户类型管理接口
@@ -76,7 +77,7 @@ public class MerchantTypePoController {
     @ApiOperation(value = "上传" + NAMESPACE + "头像")
     public Res<String> uploadAvatar(@PathVariable String uuid, MultipartFile file) throws IOException {
         service.assertUuidExits(uuid);
-        final String path = service.saveAvatar(uuid, file);
+        final String path = service.saveAvatar(UUID.randomUUID().toString(), file);
         final MerchantTypePo entity = new MerchantTypePo();
         entity.setUuid(uuid);
         entity.setAvatar(path);
