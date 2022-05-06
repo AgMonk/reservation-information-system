@@ -16,14 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static com.gin.reservationinformationsystem.module.merchant.entity.FeedBackMessagePo.STATUS_NOT_PROCESSED;
+import static com.gin.reservationinformationsystem.module.merchant.entity.FeedBackMessagePo.STATUS_PROCESSED;
 
 /**
  * 反馈信息管理接口
@@ -57,6 +55,17 @@ public class FeedBackMessagePoController {
         qw.eq("status",STATUS_NOT_PROCESSED);
         qw.orderByDesc("timestamp_created");
         return Res.success("成功",service.count(qw));
+    }
+
+    @PostMapping("complete/{uuid}")
+    @ApiOperation(value = "标记反馈信息为已处理")
+    public Res<Void> complete(@PathVariable String uuid) {
+        service.assertUuidExits(uuid);
+        final FeedBackMessagePo entity = new FeedBackMessagePo();
+        entity.setUuid(uuid);
+        entity.setStatus(STATUS_PROCESSED);
+        service.updateById(entity);
+        return Res.success("标记反馈信息为已处理成功");
     }
 
     @PostMapping("page")
