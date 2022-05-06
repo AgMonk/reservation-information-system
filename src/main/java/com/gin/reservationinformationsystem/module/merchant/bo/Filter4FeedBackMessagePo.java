@@ -10,9 +10,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-import static com.gin.reservationinformationsystem.module.merchant.entity.FeedBackMessagePo.STATUS_NOT_PROCESSED;
-import static com.gin.reservationinformationsystem.module.merchant.entity.FeedBackMessagePo.STATUS_PROCESSED;
-
 /**
  * @author bx002
  */
@@ -20,8 +17,8 @@ import static com.gin.reservationinformationsystem.module.merchant.entity.FeedBa
 @ApiModel("查询过滤条件")
 public class Filter4FeedBackMessagePo implements Serializable, IFilter {
     @ApiModelProperty("状态")
-    @EffectiveValues(prefix = "状态", values = {STATUS_NOT_PROCESSED, STATUS_PROCESSED}, nullable = true)
-    String status;
+    @EffectiveValues(prefix = "状态", values = {"0", "1"}, nullable = true)
+    Integer status;
 
     @Override
     public void handleQueryWrapper(QueryWrapper<?> queryWrapper) {

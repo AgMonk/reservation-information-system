@@ -20,9 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.gin.reservationinformationsystem.module.merchant.entity.FeedBackMessagePo.STATUS_NOT_PROCESSED;
-import static com.gin.reservationinformationsystem.module.merchant.entity.FeedBackMessagePo.STATUS_PROCESSED;
-
 /**
  * 反馈信息管理接口
  * @author bx002
@@ -52,7 +49,7 @@ public class FeedBackMessagePoController {
     @ApiOperation(value = "获取未处理反馈数量")
     public Res<Long> getNotProcessed() {
         QueryWrapper<FeedBackMessagePo> qw = new QueryWrapper<>();
-        qw.eq("status",STATUS_NOT_PROCESSED);
+        qw.eq("status",0);
         qw.orderByDesc("timestamp_created");
         return Res.success("成功",service.count(qw));
     }
@@ -63,7 +60,7 @@ public class FeedBackMessagePoController {
         service.assertUuidExits(uuid);
         final FeedBackMessagePo entity = new FeedBackMessagePo();
         entity.setUuid(uuid);
-        entity.setStatus(STATUS_PROCESSED);
+        entity.setStatus(1);
         service.updateById(entity);
         return Res.success("标记反馈信息为已处理成功");
     }

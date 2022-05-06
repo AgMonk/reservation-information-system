@@ -44,8 +44,8 @@ public class FeedBackMessagePo implements Serializable {
     @Index
     Long timestampCreated;
 
-    @Column(comment = "状态", length = 20, isNull = false,defaultValue = STATUS_NOT_PROCESSED)
-    String status;
+    @Column(comment = "状态", isNull = false,defaultValue = "0")
+    Integer status;
 
     public void createUuid() {
         this.uuid = UUID.randomUUID().toString();

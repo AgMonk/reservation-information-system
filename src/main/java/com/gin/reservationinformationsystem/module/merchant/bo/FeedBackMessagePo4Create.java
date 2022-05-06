@@ -10,8 +10,6 @@ import org.springframework.beans.BeanUtils;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-import static com.gin.reservationinformationsystem.module.merchant.entity.FeedBackMessagePo.STATUS_NOT_PROCESSED;
-
 /**
  * 创建反馈信息
  * @author bx002
@@ -31,7 +29,6 @@ public class FeedBackMessagePo4Create implements Serializable {
         final FeedBackMessagePo po = new FeedBackMessagePo();
         BeanUtils.copyProperties(this, po);
         po.createUuid();
-        po.setStatus(STATUS_NOT_PROCESSED);
         po.setTimestampCreated(ZonedDateTime.now().toEpochSecond());
         return po;
     }
